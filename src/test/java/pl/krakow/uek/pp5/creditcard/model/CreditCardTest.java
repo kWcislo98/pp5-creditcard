@@ -28,7 +28,7 @@ public class CreditCardTest {
         //Assert
         try {
             card.assignLimit(BigDecimal.valueOf(50));
-                    Assert.fail("exception should be thrown");
+            Assert.fail("exception should be thrown");
         } catch (creditBelowLimitException e) {
             Assert.assertTrue(true);
         }
