@@ -29,7 +29,7 @@ public class CreditCardTest {
         try {
             card.assignLimit(BigDecimal.valueOf(50));
             Assert.fail("exception should be thrown");
-        } catch (creditBelowLimitException e) {
+        } catch (CreditBelowLimitException e) {
             Assert.assertTrue(true);
         }
         }
@@ -44,5 +44,13 @@ public class CreditCardTest {
             card2.withdraw(BigDecimal.valueOf(100));
             Assert.assertEquals(BigDecimal.valueOf(500), card1.getCurrentBalance());
             Assert.assertEquals(BigDecimal.valueOf(900), card2.getCurrentBalance());
+        }
+        @Test(expected = NotEnoughMoneyExcpetion.class)
+        public void denyWithdrawalBelowBalance(){
+        CreditCard card = new CreditCard("1234-5678");
+        card.assignLimit(BigDecimal.valueOf(1000));
+
+        card.withdraw(BigDecimal.valueOf(600));
+        card.withdraw(BigDecimal.valueOf(600));
         }
     }
